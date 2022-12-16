@@ -83,5 +83,68 @@ var finances = [
 ['Oct-2016', 102685],
 ['Nov-2016', 795914],
 ['Dec-2016', 60988],
-['Jan-2017', 138230]
+['Jan-2017', 138230],
+['Feb-2017', 671099]
 ];
+
+console.log("Financial Analysis");
+console.log("-----------------");
+let totalMonths = finances.length;
+console.log("Total Months: " + totalMonths);
+
+
+// DECONSTRUCTION OF ARRAY ELEMENTS AND ADDING THEM UP FOR TOTAL VALUE
+let profits = 0;
+
+for (let i = 0; i < totalMonths; i++) {
+    const [date, amount] = finances[i];
+    profits += amount;
+}
+
+console.log("Total: " + profits);
+
+// END OF DECONSTRUCTION
+
+let arrayChange = [];
+let calcAmount = [];
+let changes = 0;
+let diffMonth = [];
+
+for (let i = totalMonths - 1; i >= 0; i--) {
+   const [date, amount] = finances[i];
+   arrayChange.push(amount); // this adds all numbers from bottom to top, in order
+
+}
+console.log(arrayChange[totalMonths - 1])
+
+for (let i = 0; i < totalMonths - 1; i++) {
+    diffMonth.push(arrayChange[i] - arrayChange[i+1]);
+}
+console.log(diffMonth);
+
+console.log("the array")
+console.log(arrayChange);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
