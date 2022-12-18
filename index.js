@@ -86,46 +86,56 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
-
-console.log("Financial Analysis");
-console.log("-----------------");
 let totalMonths = finances.length;
-console.log("Total Months: " + totalMonths);
-
-
-// DECONSTRUCTION OF ARRAY ELEMENTS AND ADDING THEM UP FOR TOTAL VALUE
 let profits = 0;
+let allNumbers = []; //HERE WE WILL STORE THE AMMOUNTS
+let differences = []; //HERE WE WILL STORE THE DIFFERENCES
 
 for (let i = 0; i < totalMonths; i++) {
     const [date, amount] = finances[i];
-    profits += amount;
+    profits += amount; //ADDING ALL NUMBERS TO A TOTAL PROFIT
+    allNumbers.push(amount); //HERE WE PUSH ALL THE AMOUNTS TO THE ARRAY
 }
 
-console.log("Total: " + profits);
-
-// END OF DECONSTRUCTION
-
-let arrayChange = [];
-let calcAmount = [];
-let changes = 0;
-let diffMonth = [];
-
-for (let i = totalMonths - 1; i >= 0; i--) {
-   const [date, amount] = finances[i];
-   arrayChange.push(amount); // this adds all numbers from bottom to top, in order
-
+//THIS FOR LOOP WILL MAKE THE CALCULATION FOR THE DIFFERENCES FROM MONTH TO MONTH
+for (let i =0; i < allNumbers.length - 1; i++) {
+    differences.push(allNumbers[i+1] - allNumbers[i]);
 }
-console.log(arrayChange[totalMonths - 1])
 
-for (let i = 0; i < totalMonths - 1; i++) {
-    diffMonth.push(arrayChange[i] - arrayChange[i+1]);
+//THIS CALCULATES THE AVERAGE FOR DIFFERENCE
+let sum = differences.reduce(function(a, b) {
+    return a+b;
+})
+//THIS CALCULATES THE GREATEST INCREASE
+function max_difference(arr) {
+    let max = 0;
+    let temp = 0;
+    for(var i = 0; i<arr.length -1; i++){
+        temp = arr[i+1] - arr[i];
+        max = Math.max(max, temp);
+    }
+    return "Greatest Increase: $" + max;
 }
-console.log(diffMonth);
+//THIS CALCULATES THE GREATEST DECREASE
+function min_difference(arr) {
+    let min = 0;
+    let temp = 0;
+    for(var i = 0; i<arr.length -1; i++){
+        temp = arr[i+1] - arr[i];
+        min = Math.min(min, temp);
+    }
+    return "Greatest Decrease: $" + min;
+}
 
-console.log("the array")
-console.log(arrayChange);
-
-
+console.log(
+    '', "Financial Analysis", '\n',
+    "----------------", '\n',
+    "Total Months: " + totalMonths,  '\n',
+    "Total: $" + profits, '\n',
+    "Average Change: $" + (sum/85).toFixed(2), '\n',
+    max_difference(allNumbers), '\n',
+    min_difference(allNumbers), '\n',
+);
 
 
 
